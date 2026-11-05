@@ -46,7 +46,7 @@ Welcome to your hands-on Nextflow DSL2 learning repository. This project is purp
 ## 📂 Project Directory Structure
 
 ```text
-nextflow-clinical-etl/
+nextflow-clinical-workflow/
 ├── README.md                      <-- You are here: Master training guide
 ├── main.nf                        <-- Nextflow DSL2 workflow definition
 ├── nextflow.config                <-- Parameters, resource profiles, reporting configuration
@@ -70,7 +70,7 @@ nextflow-clinical-etl/
 Open your terminal, navigate to this folder, and follow the exercises below:
 
 ```bash
-cd /Users/karthik/dev/seymour/seymour-sandbox/nextflow-clinical-etl
+cd /Users/karthik/dev/seymour/seymour-sandbox/nextflow-clinical-workflow
 ```
 
 ---
@@ -154,7 +154,7 @@ This is where you go during production incidents to triage failures!
 Run the pipeline a second time with the `-resume` flag:
 
 ```bash
-cd /Users/karthik/dev/seymour/seymour-sandbox/nextflow-clinical-etl
+cd /Users/karthik/dev/seymour/seymour-sandbox/nextflow-clinical-workflow
 nextflow run main.nf -resume
 ```
 

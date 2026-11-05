@@ -90,7 +90,7 @@ workflow {
 
     log.info """\
     =================================================================
-    🏥  C L I N I C A L   T E L E M E T R Y   N E X T F L O W   E T L
+    🏥  C L I N I C A L   T E L E M E T R Y   W O R K F L O W
     =================================================================
     Telemetry Input : ${params.telemetry}
     Resident DB     : ${params.registry}
