@@ -1,0 +1,5 @@
+timestamp,device_id,beacon_id,heart_rate,respiration_rate,motion_status,raw_signal_rssi
+2026-10-31T08:10:00,DEV-301,BCN-ROOM-303,64,14,RESTING,-49
+2026-10-31T08:11:30,DEV-302,BCN-LOUNGE-EAST,88,18,NORMAL,-66
+2026-10-31T08:12:05,DEV-301,BCN-CORRIDOR-NORTH,70,15,WALKING,-60
+

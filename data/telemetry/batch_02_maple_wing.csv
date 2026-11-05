@@ -1,0 +1,5 @@
+timestamp,device_id,beacon_id,heart_rate,respiration_rate,motion_status,raw_signal_rssi
+2026-10-31T08:05:10,DEV-201,BCN-ROOM-201,68,15,RESTING,-52
+2026-10-31T08:06:40,DEV-202,BCN-BATHROOM-205,105,22,FALL_DETECTED,-78
+2026-10-31T08:07:15,DEV-201,BCN-GARDEN-PATIO,75,17,WALKING,-85
+

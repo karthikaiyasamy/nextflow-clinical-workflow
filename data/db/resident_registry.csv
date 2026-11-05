@@ -1,0 +1,7 @@
+device_id,resident_id,resident_name,care_wing,room_number,primary_caregiver,baseline_hr_min,baseline_hr_max
+DEV-101,RES-001,Eleanor Vance,Cedar Wing,Room 102,Nurse Sarah,60,95
+DEV-102,RES-002,Arthur Pendelton,Cedar Wing,Room 104,Nurse Sarah,55,90
+DEV-201,RES-003,Margaret Campbell,Maple Wing,Room 201,Nurse David,65,100
+DEV-202,RES-004,Robert Chen,Maple Wing,Room 205,Nurse David,58,92
+DEV-301,RES-005,Dorothy Miller,Birch Wing,Room 303,Nurse Maria,62,98
+DEV-302,RES-006,James MacDonald,Birch Wing,Room 307,Nurse Maria,60,90
