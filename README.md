@@ -1,13 +1,13 @@
-# 🏥 Clinical Telemetry & Resident Enrichment Nextflow DSL2 Masterclass
-## Hands-On Training Sandbox: Bridging Philips Lifeline Telemetry to GSC High-Throughput Genomics
+# Clinical Telemetry & Resident Enrichment Nextflow DSL2 Workflow
+## High-Throughput Stream Ingestion, Resident Registry Enrichment, and Vital Signs Alerting
 
-Welcome to your hands-on Nextflow DSL2 learning repository. This project is purpose-built to simulate a realistic, high-throughput clinical event-driven architecture that bridges your real-world background at **Philips Lifeline (clinical IoT telemetry and data warehousing)** with the **Genome Sciences Centre (high-throughput cancer pipelines and annotation databases)**.
+This repository provides an idiomatic Nextflow DSL2 implementation of an event-driven clinical data workflow. It demonstrates high-throughput sensor telemetry ingestion, master patient registry enrichment, physiological anomaly detection, and data warehouse aggregation.
 
 ---
 
-## 🧭 The Architecture: Two Worlds, One Mental Model
+## Architecture: Telemetry Ingestion to Clinical Warehousing
 
-### 1. Philips Lifeline Telemetry Architecture
+### 1. Patient Safety Systems Telemetry Architecture
 ```
 [ Incoming Telemetry Batches ]
             │
@@ -21,10 +21,10 @@ Welcome to your hands-on Nextflow DSL2 learning repository. This project is purp
 [ All Batches Synchronized ]
             │
             ▼  Process 3: AGGREGATE_WAREHOUSE
-[ Redshift Warehousing Master Table + Nurse Alert Dashboard ]
+[ Analytical Warehousing Master Table + Nurse Alert Dashboard ]
 ```
 
-### 2. GSC Cancer Genomics Equivalent
+### 2. High-Throughput Genomic Pipeline Equivalent
 ```
 [ Raw Sequencing FASTQ Batches ]
             │
@@ -37,13 +37,13 @@ Welcome to your hands-on Nextflow DSL2 learning repository. This project is purp
             ▼  Channel Operator: .collect() (Cohort Barrier)
 [ All Sample Variants Synchronized ]
             │
-            ▼  Process 3: MULTIQC_AND_POG_REPORT
-[ Variant Warehouse Table + Molecular Tumor Board Clinical Report ]
+            ▼  Process 3: MULTIQC_AND_COHORT_REPORT
+[ Variant Warehouse Table + Molecular Cohort Clinical Report ]
 ```
 
 ---
 
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```text
 nextflow-clinical-workflow/
@@ -65,7 +65,7 @@ nextflow-clinical-workflow/
 
 ---
 
-## 🚀 How to Run the Pipeline (Hands-On Exercises)
+## How to Run the Pipeline (Step-by-Step)
 
 Open your terminal, navigate to this folder, and follow the exercises below:
 
@@ -89,7 +89,7 @@ N E X T F L O W  ~  version 24.10.x
 Launching `main.nf` [friendly_einstein] DSL2 - revision: 9283f...
 
 =================================================================
-🏥  C L I N I C A L   T E L E M E T R Y   N E X T F L O W   E T L
+C L I N I C A L   T E L E M E T R Y   W O R K F L O W
 =================================================================
 Telemetry Input : .../data/telemetry/*.csv
 Resident DB     : .../data/db/resident_registry.csv
@@ -97,9 +97,9 @@ Results Dir     : .../results
 =================================================================
 
 executor >  local (7)
-[2a/1b4c91] process > CLEAN_TELEMETRY (Cleaning batch_01_cedar_wing) [100%] 3 of 3 ✔
-[8f/90de32] process > ENRICH_RESIDENT (Enriching batch_02_maple_wing) [100%] 3 of 3 ✔
-[d3/56ae11] process > AGGREGATE_WAREHOUSE                             [100%] 1 of 1 ✔
+[2a/1b4c91] process > CLEAN_TELEMETRY (Cleaning batch_01_cedar_wing) [100%] 3 of 3
+[8f/90de32] process > ENRICH_RESIDENT (Enriching batch_02_maple_wing) [100%] 3 of 3
+[d3/56ae11] process > AGGREGATE_WAREHOUSE                             [100%] 1 of 1
 ```
 
 Notice how Nextflow launched **3 parallel tasks** for `CLEAN_TELEMETRY` (one for each batch CSV), then automatically routed their outputs into **3 parallel tasks** for `ENRICH_RESIDENT`, and finally synchronized all outputs into **1 task** for `AGGREGATE_WAREHOUSE`!
@@ -161,9 +161,9 @@ nextflow run main.nf -resume
 #### What Happens:
 ```text
 executor >  local (7)
-[2a/1b4c91] process > CLEAN_TELEMETRY (Cleaning batch_01_cedar_wing) [100%] 3 of 3, cached: 3 ✔
-[8f/90de32] process > ENRICH_RESIDENT (Enriching batch_02_maple_wing) [100%] 3 of 3, cached: 3 ✔
-[d3/56ae11] process > AGGREGATE_WAREHOUSE                             [100%] 1 of 1, cached: 1 ✔
+[2a/1b4c91] process > CLEAN_TELEMETRY (Cleaning batch_01_cedar_wing) [100%] 3 of 3, cached: 3
+[8f/90de32] process > ENRICH_RESIDENT (Enriching batch_02_maple_wing) [100%] 3 of 3, cached: 3
+[d3/56ae11] process > AGGREGATE_WAREHOUSE                             [100%] 1 of 1, cached: 1
 ```
 
 Notice: **cached: 3, cached: 3, cached: 1**!  
@@ -193,7 +193,7 @@ rm data/telemetry/batch_04_oak_wing.csv
 
 ---
 
-## 🧠 Nextflow DSL2 Concepts: The Software Engineer's Cheat Sheet
+## Nextflow DSL2 Architectural Concepts and Reference
 
 ### 1. The `bin/` Directory Convention
 In standard bash or Python, you have to specify `python3 /absolute/path/to/script.py`.  
@@ -209,18 +209,13 @@ In Nextflow, **any executable script in the `bin/` directory is automatically ad
 
 ---
 
-## 🎙️ Spoken Interview Script: How to Talk About This Live
+## Enterprise Pipeline Design Patterns
 
-If the GSC selection committee asks:
-*"Can you describe how you approach building pipelines in Nextflow?"*
+In distributed high-throughput processing environments, this workflow demonstrates key reactive dataflow design principles:
 
-> "Coming from a distributed systems background where I built high-throughput streaming and micro-batch architectures using AWS DynamoDB, Kinesis, Firehose, and Redshift, I found Nextflow DSL2's reactive dataflow paradigm very intuitive.
->
-> In fact, to solidify my hands-on mastery, I built a working DSL2 pipeline modeled on an event-driven clinical telemetry architecture:
->
-> * I structured the pipeline into decoupled, single-responsibility processes: first cleaning raw incoming sensor batches in parallel, then enriching them by joining against a master patient database and evaluating clinical vital sign alerts.
-> * I used Nextflow channel operators like `.collect()` to establish a micro-batch synchronization barrier, mirroring the buffering window I engineered with Kinesis Firehose before bulk loading into a data warehouse.
-> * I configured execution tracing and dynamic profiles in `nextflow.config`, and verified how Nextflow's DAG caching (`-resume`) uses task hashing to re-run only invalidated steps.
->
-> That exact same pattern directly governs cancer variant calling at the GSC: streaming FASTQ files into parallel alignment processes, joining variant calls against ClinVar or COSMIC annotation databases, and collecting sample outputs into a unified cohort report for the POG molecular board."
+* **Decoupled, Single-Responsibility Processes:** Raw telemetry packets are cleaned and validated in parallel worker sandboxes before being enriched against the master patient database.
+* **Micro-Batch Buffering & Synchronization:** The Nextflow `.collect()` operator establishes a synchronization barrier, aggregating distributed batch outputs before performing consolidated warehouse table creation and alert reporting.
+* **State Management & Caching:** Leverages Nextflow's cryptographic SHA-256 task hashing (`-resume`) to ensure idempotent re-runs, skipping unmodified steps and dramatically reducing compute overhead.
+* **Portability & Dynamic Profiles:** Resource definitions (CPUs, memory, executors) are isolated within `nextflow.config`, enabling seamless local execution or SLURM cluster scheduling.
+* **Cross-Domain Architectural Parallels:** This exact reactive pattern maps directly to high-throughput bioinformatics workflows, such as streaming FASTQ reads through alignment, variant calling, annotation against reference databases (ClinVar / COSMIC), and cohort aggregation.
 

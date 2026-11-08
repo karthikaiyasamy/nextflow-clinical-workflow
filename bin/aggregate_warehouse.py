@@ -85,18 +85,18 @@ def aggregate_batches(
 
     # 2. Write Markdown Clinical Alert Report
     with open(output_summary_path, mode="w", encoding="utf-8") as out_md:
-        out_md.write("# 🏥 Clinical Telemetry & Emergency Alert Summary\n\n")
+        out_md.write("# Clinical Telemetry & Emergency Alert Summary\n\n")
         out_md.write(f"**Total Processed Telemetry Records:** {len(all_records)}  \n")
         out_md.write(f"**Total Critical Alerts Detected:** {len(alerts)}  \n\n")
 
-        out_md.write("### 🏢 Telemetry Volume by Care Wing\n\n")
+        out_md.write("### Telemetry Volume by Care Wing\n\n")
         out_md.write("| Care Facility Wing | Total Records Processed |\n")
         out_md.write("| :--- | :--- |\n")
         for wing, count in sorted(wing_counts.items()):
             out_md.write(f"| {wing} | {count} |\n")
         out_md.write("\n")
 
-        out_md.write("### 🚨 Active Clinical Alerts Requiring Nurse Intervention\n\n")
+        out_md.write("### Active Clinical Alerts Requiring Nurse Intervention\n\n")
         if alerts:
             out_md.write(
                 "| Timestamp | Resident Name | Room | Alert Type | HR | Motion | Caregiver |\n"

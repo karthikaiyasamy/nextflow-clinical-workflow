@@ -2,8 +2,8 @@ nextflow.enable.dsl = 2
 
 /*
 ========================================================================================
-    🏥 CLINICAL TELEMETRY & RESIDENT ENRICHMENT PIPELINE (NEXTFLOW DSL2)
-    Simulating Philips Lifeline Event-Driven Micro-Batch Architecture
+    CLINICAL TELEMETRY & RESIDENT ENRICHMENT PIPELINE (NEXTFLOW DSL2)
+    Simulating Clinical Patient Safety Event-Driven Micro-Batch Architecture
 ========================================================================================
 */
 
@@ -90,7 +90,7 @@ workflow {
 
     log.info """\
     =================================================================
-    🏥  C L I N I C A L   T E L E M E T R Y   W O R K F L O W
+    C L I N I C A L   T E L E M E T R Y   W O R K F L O W
     =================================================================
     Telemetry Input : ${params.telemetry}
     Resident DB     : ${params.registry}
